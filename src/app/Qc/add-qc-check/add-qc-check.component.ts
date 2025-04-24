@@ -1,0 +1,70 @@
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { QualityControl } from '../../Model/qualitycontrol.model';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-add-qc-check',
+  imports: [FormsModule],
+  templateUrl: './add-qc-check.component.html',
+  styleUrl: './add-qc-check.component.css'
+})
+export class AddQcCheckComponent {
+
+  qc:QualityControl = new QualityControl()
+  
+  isUpdate=false;
+
+  constructor(private router:Router){
+    
+    const nav= this.router.getCurrentNavigation();
+
+    if(nav?.extras.state&&nav.extras.state['a']){
+
+      this.qc=nav.extras.state['a'];
+
+      this.isUpdate=true;
+    }
+     
+
+
+    }
+
+    // this is the form Method
+
+    submission(){
+       
+      let  orders: QualityControl[]=JSON.parse(localStorage.getItem('b') || '[]');
+
+      if(this.isUpdate){
+
+       for(let i=0; i<orders.length;i++){
+
+        if(orders[i].passed_qty==this.qc.passed_qty){
+
+          orders[i]=this.qc;
+
+        }
+
+       
+       }
+      }
+
+      else{
+
+        orders.push(this.qc)
+      }
+
+      localStorage.setItem('b',JSON.stringify(orders))
+
+      this.qc=new QualityControl();
+
+      this.router.navigate(['/ql'])
+    }
+
+
+
+  }
+
+
+

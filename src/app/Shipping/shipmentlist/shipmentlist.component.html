@@ -1,0 +1,37 @@
+<div class="container">
+  <h1 class="text-success" style="text-align: center;">Shipment List</h1>
+
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>Shipping ID</th>
+        <th>Order ID</th>
+        <th>Shipping Date</th>
+        <th>Shipped Qty</th>
+        <th>Invoice No</th>
+        <th>Destination</th>
+        <th>Carrier</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Data rows -->
+       @for (item of collect_order; track item; let i= $index) {
+        <tr>
+          <td>{{i+1}}</td>
+          <td>{{i+1}}</td>
+          <td>{{item.shipping_date}}</td>
+          <td>{{item.shipped_qty}}</td>
+          <td>{{item.invoice_no}}</td>
+          <td>{{item.destination}}</td>
+          <td>{{item.carrier}}</td>
+          <td>
+            <button type="button" class="btn btn-success" (click)="Edit(item)">Edit</button>
+            <button type="button" class="btn btn-danger" (click)="Delete(item)">Delete</button>
+          </td>
+        </tr>
+       }
+    </tbody>
+  </table>
+  
+</div>

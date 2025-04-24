@@ -1,0 +1,37 @@
+<div class="container mt-4">
+
+  <h1 class="text-success text-center">Buyer List</h1>
+
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>#</th> <!-- Auto ID -->
+        <th>Buyer ID</th>
+        <th>Buyer Name</th>
+        <th>Contact Person</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of collect_order; track item; let i = $index) {
+        <tr>
+          <td>{{ i + 1 }}</td>
+          <td>{{ item.buyer_id }}</td>
+          <td>{{ item.buyer_name }}</td>
+          <td>{{ item.contact_person }}</td>
+          <td>{{ item.email }}</td>
+          <td>{{ item.phone }}</td>
+          <td>{{ item.address }}</td>
+          <td>
+            <button class="btn btn-success" (click)="Edit(item)">Edit</button>
+            <button class="btn btn-danger" (click)="Delete(item)">Delete</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+</div>
