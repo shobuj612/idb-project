@@ -5,11 +5,11 @@
     <div class="row mb-3">
       <div class="col-md-6">
         <label for="qc_id" class="form-label">QC ID</label>
-        <input type="text" class="form-control" id="qc_id" name="qc_id" [(ngModel)]="qc.qc_id">
+        <input type="number" class="form-control" id="qc_id" name="qc_id" [(ngModel)]="qc.qc_id">
       </div>
       <div class="col-md-6">
         <label for="order_id" class="form-label">Order ID</label>
-        <input type="text" class="form-control" id="order_id" name="order_id" [(ngModel)]="qc.order_id">
+        <input type="number" class="form-control" id="order_id" name="order_id" [(ngModel)]="qc.order_id">
       </div>
     </div>
   
@@ -37,5 +37,4 @@
   
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
-  
 </div>

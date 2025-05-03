@@ -16,21 +16,19 @@
       </tr>
     </thead>
     <tbody>
-      @for (item of collect_order; track item; let i = $index) {
-        <tr>
-          <td>{{ i + 1 }}</td>
-          <td>{{ item.buyer_id }}</td>
-          <td>{{ item.buyer_name }}</td>
-          <td>{{ item.contact_person }}</td>
-          <td>{{ item.email }}</td>
-          <td>{{ item.phone }}</td>
-          <td>{{ item.address }}</td>
-          <td>
-            <button class="btn btn-success" (click)="Edit(item)">Edit</button>
-            <button class="btn btn-danger" (click)="Delete(item)">Delete</button>
-          </td>
-        </tr>
-      }
+      <tr *ngFor="let item of collect_order; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ item.buyerId }}</td>
+        <td>{{ item.buyerName || 'N/A' }}</td>
+        <td>{{ item.contactPerson || 'N/A' }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.phone }}</td>
+        <td>{{ item.address }}</td>
+        <td>
+          <button class="btn btn-success" (click)="Edit(item)">Edit</button>
+          <button class="btn btn-danger" (click)="Delete(item)">Delete</button>
+        </td>
+      </tr>
     </tbody>
   </table>
 

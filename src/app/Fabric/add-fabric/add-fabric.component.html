@@ -1,15 +1,15 @@
 <div class="container">
-  <h1 class="text-success" style="text-align: center;">Add fabric</h1>
+  <h1 class="text-success" style="text-align: center;">Add Fabric</h1>
 
   <form (ngSubmit)="submission()">
-    <div class="row mb-3" >
+    <div class="row mb-3">
       <div class="col-md-6">
         <label for="fabric_id" class="form-label">Fabric ID</label>
-        <input type="text" class="form-control" id="fabric_id" name="fabric_id" [(ngModel)]="farbric.fabric_id">
+        <input type="number" class="form-control" id="fabric_id" name="fabric_id" [(ngModel)]="farbric.fabric_id">
       </div>
       <div class="col-md-6">
         <label for="order_id" class="form-label">Order ID</label>
-        <input type="text" class="form-control" id="order_id" name="order_id" [(ngModel)]="farbric.order_id">
+        <input type="number" class="form-control" id="order_id" name="order_id" [(ngModel)]="farbric.order_id">
       </div>
     </div>
 
@@ -20,7 +20,7 @@
       </div>
       <div class="col-md-6">
         <label for="fabric_qty" class="form-label">Fabric Qty</label>
-        <input type="text" class="form-control" id="fabric_qty" name="fabric_qty" [(ngModel)]="farbric.fabric_qty">
+        <input type="number" class="form-control" id="fabric_qty" name="fabric_qty" [(ngModel)]="farbric.fabric_qty">
       </div>
     </div>
 
@@ -31,7 +31,7 @@
       </div>
       <div class="col-md-6">
         <label for="available_stock" class="form-label">Available Stock</label>
-        <input type="text" class="form-control" id="available_stock" name="available_stock" [(ngModel)]="farbric.available_stock">
+        <input type="number" class="form-control" id="available_stock" name="available_stock" [(ngModel)]="farbric.available_stock">
       </div>
     </div>
 

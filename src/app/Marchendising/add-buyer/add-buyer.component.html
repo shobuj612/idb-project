@@ -1,20 +1,20 @@
-
 <form class="container mt-4" (ngSubmit)="submission()">
   <div class="row mb-3">
     <div class="col-md-6">
       <label for="buyerId" class="form-label">Buyer ID:</label>
-      <input type="text" class="form-control" id="buyerId" name="buyerId" [(ngModel)]="buy.buyer_id" required />
+      <input type="number" class="form-control" id="buyerId" name="buyerId" [(ngModel)]="buy.buyerId" required />
+      <input type="hidden" [(ngModel)]="buy.buyerId" *ngIf="isEditing" />
     </div>
     <div class="col-md-6">
       <label for="buyerName" class="form-label">Buyer Name:</label>
-      <input type="text" class="form-control" id="buyerName" name="buyerName" [(ngModel)]="buy.buyer_name" required />
+      <input type="text" class="form-control" id="buyerName" name="buyerName" [(ngModel)]="buy.buyerName" />
     </div>
   </div>
 
   <div class="row mb-3">
     <div class="col-md-6">
       <label for="contactPerson" class="form-label">Contact Person:</label>
-      <input type="text" class="form-control" id="contactPerson" name="contactPerson" [(ngModel)]="buy.contact_person" required />
+      <input type="text" class="form-control" id="contactPerson" name="contactPerson" [(ngModel)]="buy.contactPerson" />
     </div>
     <div class="col-md-6">
       <label for="email" class="form-label">Email:</label>
