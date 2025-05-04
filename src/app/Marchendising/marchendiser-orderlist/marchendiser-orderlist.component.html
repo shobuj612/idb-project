@@ -4,8 +4,8 @@
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
-        <th>#</th>
-        <th>#</th>
+        <th>MarchId</th>
+        <th>OrderId</th>
         <th>Merchandiser Name</th>
         <th>Sampling Done</th>
         <th>Approval Date</th>
@@ -14,10 +14,10 @@
       </tr>
     </thead>
     <tbody>
-      @for (item of collect_order; track item; let i=$index) {
+      @for (item of collect_order; track item) {
         <tr>
-          <td>{{i+1}}</td>
-          <td>{{i+1}}</td>
+          <td>{{item.merch_id}}</td>
+          <td>{{item.order_id}}</td>
           <td>{{item.merchandiser_name}}</td>
           <td>{{item.approval_date}}</td>
           <td>{{item.sampling_done}}</td>

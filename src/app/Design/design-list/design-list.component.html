@@ -3,8 +3,8 @@
   <table class="table table-bordered table-hover" >
     <thead>
       <tr>
-        <th>#</th>
-        <th>#</th>
+        <th>DesignId</th>
+        <th>OrderId</th>
         <th>Design Name</th>
         <th>Design Image URL</th>
         <th>Status</th>
@@ -14,10 +14,10 @@
     </thead>
     <tbody>
       <!-- Data rows -->
-       @for (item of collect_order; track item; let i= $index) {
+       @for (item of collect_order; track item) {
         <tr>
-          <td>{{i+1}}</td>
-          <td>{{i+1}}</td>
+          <td>{{item.design_id}}</td>
+          <td>{{item.order_id}}</td>
           <td>{{item.design_name}}</td>
           <td>{{item.design_image_url}}</td>
           <td>{{item.status}}</td>

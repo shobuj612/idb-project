@@ -4,7 +4,7 @@
   <table class="table table-bordered table-striped">
     <thead class="table-dark">
       <tr>
-        <th>#</th>
+        
         <th>Buyer ID</th>
         <th>Buyer Name</th>
         <th>Contact Person</th>
@@ -15,19 +15,21 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of collect_order; let i = index">
-        <td>{{ i + 1 }}</td>
-        <td>{{ item.buyerId || 'N/A' }}</td>
-        <td>{{ item.buyerName || 'N/A' }}</td>
-        <td>{{ item.contactPerson || 'N/A' }}</td>
-        <td>{{ item.email || 'N/A' }}</td>
-        <td>{{ item.phone || 'N/A' }}</td>
-        <td>{{ item.address || 'N/A' }}</td>
-        <td>
-          <button class="btn btn-success" (click)="Edit(item)">Edit</button>
-          <button class="btn btn-danger" (click)="Delete(item)">Delete</button>
-        </td>
-      </tr>
+      @for (item of collect_order; track item) {
+
+        <tr>
+          <td>{{ item.buyerId}}</td>
+          <td>{{ item.buyerName}}</td>
+          <td>{{ item.contactPerson}}</td>
+          <td>{{ item.email}}</td>
+          <td>{{ item.phone}}</td>
+          <td>{{ item.address }}</td>
+          <td>
+            <button class="btn btn-success" (click)="Edit(item)">Edit</button>
+            <button class="btn btn-danger" (click)="Delete(item)">Delete</button>
+          </td>
+        </tr>
+      }
     </tbody>
   </table>
 </div>

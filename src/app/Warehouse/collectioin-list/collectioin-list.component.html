@@ -9,10 +9,10 @@
     </tr>
   </thead>
   <tbody>
-   @for (item of collect_order; track item; let i= $index) {
+   @for (item of collect_order; track item) {
     <tr>
-      <td>{{i+1}}</td>
-      <td>{{i+1}}</td>
+      <td>{{item.warehouse_id}}</td>
+      <td>{{item.order_id}}</td>
       <td>{{item.received_date}}</td>
       <td>{{item.stored_qty}}</td>
       <td>

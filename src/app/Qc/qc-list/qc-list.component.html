@@ -15,12 +15,12 @@
     </thead>
     <tbody>
       <!-- Data rows -->
-       @for (item of collect_order; track item; let i= $index) {
+       @for (item of collect_order; track item) {
           
         <tr>
           
-        <td>{{i+1}}</td>
-        <td>{{i+1}}</td>
+        <td>{{item.qc_id}}</td>
+        <td>{{item.order_id}}</td>
         <td>{{item.inspection_date}}</td>
         <td>{{item.rejected_qty}}</td>
         <td>{{item.remarks}}</td>

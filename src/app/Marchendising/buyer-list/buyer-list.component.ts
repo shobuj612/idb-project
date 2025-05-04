@@ -82,27 +82,18 @@ export class BuyerListComponent  implements OnInit{
 
   // this is the delete method to delete something from the database
 
-
-  Delete(a:Buyer){
-
-    if(confirm('do you want to delete?')){
-
-
-      this.buyerService.deleteBuyerByService(a.buyerId).subscribe(()=>{
-
-        this.getAllBuyer();
-
-      })
-
+  Delete(a: Buyer): void {
+    if (a.buyerId != null) {  // Check if buyerId is not null or undefined
+      if (confirm('Do you want to delete this buyer?')) {
+        this.buyerService.deleteBuyerByService(a.buyerId).subscribe(() => {
+          this.getAllBuyer();  // Refresh the list after deletion
+        });
+      }
+    } else {
+      alert('Invalid buyer ID');
     }
-
-    else{
-
-      alert('invalid id?')
-    }
-    
   }
-
+  
 }
 
 

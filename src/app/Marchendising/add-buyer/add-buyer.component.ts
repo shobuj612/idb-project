@@ -71,7 +71,7 @@ export class AddBuyerComponent {
       if(this.isUpdate){
 
         
-      this.buyerService.updateBuyerByService(this.buy.buyerId,this.buy).subscribe(()=>{
+      this.buyerService.updateBuyerByService(this.buy.buyerId!,this.buy).subscribe(()=>{
 
         this.router.navigate(['/bl'])
       })
