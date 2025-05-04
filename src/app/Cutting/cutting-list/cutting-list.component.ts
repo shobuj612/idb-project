@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Cutting } from '../../Model/cutting.model';
 import { Router } from '@angular/router';
+import { CutService } from '../../Services/cutService/cut.service';
 
 @Component({
   selector: 'app-cutting-list',
@@ -15,7 +16,7 @@ export class CuttingListComponent implements OnInit{
 
   collect_order:Cutting[]=[];
 
-  constructor(private router:Router){
+  constructor(private router:Router , private cutService:CutService){
 
 
   }
@@ -23,8 +24,20 @@ export class CuttingListComponent implements OnInit{
 
   ngOnInit(): void {
       
-    this.collect_order=JSON.parse(localStorage.getItem('b') || '[]');
+   // this.collect_order=JSON.parse(localStorage.getItem('b') || '[]');
 
+      this.fetchAllCut()
+  }
+
+
+  // this is the method to collect data from the database
+
+  fetchAllCut(){
+
+    this.cutService.getAllCut().subscribe((data)=>{
+
+      this.collect_order=data;
+    })
   }
 
   Edit(a:Cutting){
@@ -34,14 +47,27 @@ export class CuttingListComponent implements OnInit{
 
   Delete(a:Cutting){
 
-    if(confirm("are you want to delete?")){
+    if(a.cutting_id !=null){
+
+      if(confirm("are you want to delete?")){
 
 
-      this.collect_order=this.collect_order.filter(f=>f!==a);
+        //this.collect_order=this.collect_order.filter(f=>f!==a);
+  
+      //  localStorage.setItem('b',JSON.stringify(this.collect_order))
 
-      localStorage.setItem('b',JSON.stringify(this.collect_order))
+      this.cutService.deleteDesignByService(a.cutting_id).subscribe(()=>{
+
+        this.fetchAllCut()
+      })
+      }
     }
-  }
+
+    else{
+
+      alert('this is invalid id')
+    }
+    }
 
 }
 

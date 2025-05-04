@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Merchandising } from '../../Model/marchendising.model';
 import { Router } from '@angular/router';
+import { MarchService } from '../../Services/marService/march.service';
 
 @Component({
   selector: 'app-marchendiser-orderlist',
@@ -16,7 +17,7 @@ export class MarchendiserOrderlistComponent  implements OnInit{
 
   collect_order:Merchandising[]=[];
 
-  constructor(private router:Router){
+  constructor(private router:Router, private marchService:MarchService){
 
 
   }
@@ -24,7 +25,20 @@ export class MarchendiserOrderlistComponent  implements OnInit{
 
   ngOnInit(): void {
       
-    this.collect_order=JSON.parse(localStorage.getItem('b') || '[]');
+    //this.collect_order=JSON.parse(localStorage.getItem('b') || '[]');
+
+    this.getAllMarch()
+
+  }
+
+  // this is the method to get all the March from the database
+
+  getAllMarch(){
+
+  this.marchService.getAllMarchendising().subscribe((data)=>{
+
+    this.collect_order=data;
+  })
 
   }
 
@@ -35,15 +49,28 @@ export class MarchendiserOrderlistComponent  implements OnInit{
 
   Delete(a:Merchandising){
 
-    if(confirm("are you want to delete?")){
+    if(a.merch_id!=null){
+
+      if(confirm("are you want to delete?")){
 
 
-      this.collect_order=this.collect_order.filter(f=>f!==a);
+        //this.collect_order=this.collect_order.filter(f=>f!==a);
+  
+        //localStorage.setItem('b',JSON.stringify(this.collect_order))
 
-      localStorage.setItem('b',JSON.stringify(this.collect_order))
+        this.marchService.deleteMarchByService(a.merch_id).subscribe(()=>{
+
+          this.getAllMarch();
+        })
+      }
     }
-  }
 
+    else{
+
+      alert('Invalid Id?')
+    }
+  
+    }
 }
 
 

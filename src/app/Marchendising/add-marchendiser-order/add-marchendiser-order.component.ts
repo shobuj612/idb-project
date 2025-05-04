@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Merchandising } from '../../Model/marchendising.model';
 import { Router } from '@angular/router';
+import { MarchService } from '../../Services/marService/march.service';
 
 @Component({
   selector: 'app-add-marchendiser-order',
@@ -16,7 +17,7 @@ export class AddMarchendiserOrderComponent {
    
   isUpdate=false;
 
-  constructor(private router:Router){
+  constructor(private router:Router,private marchService:MarchService){
     
     const nav= this.router.getCurrentNavigation();
 
@@ -34,7 +35,8 @@ export class AddMarchendiserOrderComponent {
     // this is the form Method
 
     submission(){
-       
+       /**
+        * 
       let  orders: Merchandising[]=JSON.parse(localStorage.getItem('b') || '[]');
 
       if(this.isUpdate){
@@ -61,9 +63,30 @@ export class AddMarchendiserOrderComponent {
       this.marchendiser=new Merchandising();
 
       this.router.navigate(['/ml'])
+
+
+      
+        */
+
+
+      if(this.isUpdate){
+
+
+        this.marchService.updateMarchByService(this.marchendiser.merch_id!,this.marchendiser).subscribe(()=>{
+
+          this.router.navigate(['/ml'])
+        })
+      }
+
+      else{
+
+        this.marchService.postMarchByService(this.marchendiser).subscribe(()=>{
+
+          this.marchendiser=new Merchandising();
+          this.router.navigate(['/ml'])
+        })
+      }
     }
-
-
 
   }
 

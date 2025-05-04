@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Design } from '../../Model/design.model';
 import { Router } from '@angular/router';
+import { DesignService } from '../../Services/DesignSerivce/design.service';
 
 @Component({
   selector: 'app-add-design',
@@ -17,7 +18,7 @@ export class AddDesignComponent {
    
   isUpdate=false;
 
-  constructor(private router:Router){
+  constructor(private router:Router , private designService:DesignService){
     
     const nav= this.router.getCurrentNavigation();
 
@@ -35,7 +36,9 @@ export class AddDesignComponent {
     // this is the form Method
 
     submission(){
-       
+     /**
+      * 
+      *   
       let  orders: Design[]=JSON.parse(localStorage.getItem('b') || '[]');
 
       if(this.isUpdate){
@@ -65,7 +68,24 @@ export class AddDesignComponent {
     }
 
 
+      */
 
-  
+     if(this.isUpdate){
 
+      this.designService.updateDesignByService(this.desingn.design_id!,this.desingn).subscribe(()=>{
+
+        this.router.navigate(['/dl'])
+      })
+     }
+        
+     else{
+
+      this.designService.postDesingByService(this.desingn).subscribe(()=>{
+
+        this.desingn= new Design()
+
+        this.router.navigate(['/dl'])
+      })
+     }
+    }
 }

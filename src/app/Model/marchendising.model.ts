@@ -1,5 +1,5 @@
 export class Merchandising {
-  merch_id: number;
+  merch_id?: number;
   order_id: number;
   merchandiser_name: string;
   sampling_done: string;
@@ -7,7 +7,7 @@ export class Merchandising {
   remarks: string;
 
   constructor() {
-    this.merch_id = 0;  // Initializing merch_id as a number
+    //this.merch_id = 0;  // Initializing merch_id as a number
     this.order_id = 0;   // Initializing order_id as a number
     this.merchandiser_name = '';
     this.sampling_done = 'N';

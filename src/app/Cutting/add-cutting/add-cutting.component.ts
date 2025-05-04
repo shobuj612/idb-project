@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Cutting } from '../../Model/cutting.model';
 import { Router } from '@angular/router';
+import { CutService } from '../../Services/cutService/cut.service';
 
 @Component({
   selector: 'app-add-cutting',
@@ -17,7 +18,7 @@ export class AddCuttingComponent {
    
   isUpdate=false;
 
-  constructor(private router:Router){
+  constructor(private router:Router , private cutService:CutService){
     
     const nav= this.router.getCurrentNavigation();
 
@@ -36,7 +37,9 @@ export class AddCuttingComponent {
 
     submission(){
        
-      let  orders: Cutting[]=JSON.parse(localStorage.getItem('b') || '[]');
+      /**
+       * 
+       * let  orders: Cutting[]=JSON.parse(localStorage.getItem('b') || '[]');
 
       if(this.isUpdate){
 
@@ -66,8 +69,27 @@ export class AddCuttingComponent {
 
 
 
+       */
+
+    if(this.isUpdate){
+     
+      this.cutService.updateCuttingByServie(this.cut.cutting_id!,this.cut).subscribe(()=>{
+
+        this.router.navigate(['/cl'])
+      })
+
+    }
   
+     else{
+
+      this.cutService.postDesignByService(this.cut).subscribe(()=>{
+
+        this.cut= new Cutting()
+
+        this.router.navigate(['/cl'])
+      })
+     }
 
 }
 
-
+}

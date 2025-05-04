@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Order } from '../../Model/order.model';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { OrderService } from '../../Services/OrderService/order.service';
 
 @Component({
   selector: 'app-add-order',
@@ -15,7 +16,7 @@ export class AddOrderComponent {
 
   isUpdate=false;
 
-  constructor(private router:Router){
+  constructor(private router:Router,private orderService:OrderService){
     
     const nav= this.router.getCurrentNavigation();
 
@@ -33,7 +34,10 @@ export class AddOrderComponent {
     // this is the form Method
 
     submission(){
-       
+
+       /**
+        * 
+        * 
       let  orders: Order[]=JSON.parse(localStorage.getItem('b') || '[]');
 
       if(this.isUpdate){
@@ -60,6 +64,32 @@ export class AddOrderComponent {
       this.order=new Order();
 
       this.router.navigate(['/ol'])
+
+        */
+
+      if(this.isUpdate){
+
+      this.orderService.updateOrderByService(this.order.order_id!,this.order).subscribe(()=>{
+
+
+        this.router.navigate(['/ol'])
+      })
+
+      }
+
+
+      else{
+
+        this.orderService.createOrderByService(this.order).subscribe(()=>{
+
+
+          this.order=new Order()
+
+          this.router.navigate(['/ol'])
+        })
+      }
+
+      
     }
 
 

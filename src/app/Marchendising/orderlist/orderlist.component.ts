@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Order } from '../../Model/order.model';
 import { Router } from '@angular/router';
+import { OrderService } from '../../Services/OrderService/order.service';
 
 @Component({
   selector: 'app-orderlist',
@@ -15,17 +16,29 @@ export class OrderlistComponent  implements OnInit{
 
   collect_order:Order[]=[];
 
-  constructor(private router:Router){
-
-
-  }
+  constructor(private router:Router, private orderServic:OrderService){}
 
 
   ngOnInit(): void {
       
-    this.collect_order=JSON.parse(localStorage.getItem('b') || '[]');
+    //this.collect_order=JSON.parse(localStorage.getItem('b') || '[]');
+
+    this.fetchAllOrders()
 
   }
+
+   fetchAllOrders(){
+
+
+     this.orderServic.getAllOrderByService().subscribe((mydata)=>{
+
+      this.collect_order=mydata;
+
+     })
+
+   }
+
+     // this is the edit method
 
   Edit(a:Order){
 
@@ -34,12 +47,27 @@ export class OrderlistComponent  implements OnInit{
 
   Delete(a:Order){
 
-    if(confirm("are you want to delete?")){
+    if(a.order_id!=null){
+
+      if(confirm("are you want to delete?")){
 
 
-      this.collect_order=this.collect_order.filter(f=>f!==a);
+        //this.collect_order=this.collect_order.filter(f=>f!==a);
+  
+        //localStorage.setItem('b',JSON.stringify(this.collect_order))
 
-      localStorage.setItem('b',JSON.stringify(this.collect_order))
+        this.orderServic.deleteOrderByService(a.order_id).subscribe(()=>{
+
+          this.fetchAllOrders();
+
+          
+        })
+      }
+    }
+
+    else{
+
+      alert('Invalid id?')
     }
   }
 
