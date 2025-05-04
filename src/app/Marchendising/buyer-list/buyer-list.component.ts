@@ -95,6 +95,11 @@ export class BuyerListComponent  implements OnInit{
       })
 
     }
+
+    else{
+
+      alert('invalid id?')
+    }
     
   }
 

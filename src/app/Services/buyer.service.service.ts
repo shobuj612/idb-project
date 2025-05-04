@@ -19,6 +19,9 @@ export class BuyerServiceService {
 
   // Method to update a buyer in the database
   updateBuyerByService(id: number, buyer: Buyer): Observable<Buyer> {
+    if (id == null) {
+      throw new Error('Buyer ID cannot be null or undefined');
+    }
     return this.http.put<Buyer>(`${this.baseUrl}/${id}`, buyer);
   }
 
@@ -29,6 +32,9 @@ export class BuyerServiceService {
 
   // Method to delete a buyer from the database
   deleteBuyerByService(id: number): Observable<void> {
+    if (id <= 0) {
+      throw new Error('Invalid ID for deletion');
+    }
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 

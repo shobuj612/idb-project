@@ -1,11 +1,10 @@
 <div class="container mt-4">
-
   <h1 class="text-success text-center">Buyer List</h1>
 
   <table class="table table-bordered table-striped">
     <thead class="table-dark">
       <tr>
-        <th>#</th> <!-- Auto ID -->
+        <th>#</th>
         <th>Buyer ID</th>
         <th>Buyer Name</th>
         <th>Contact Person</th>
@@ -18,12 +17,12 @@
     <tbody>
       <tr *ngFor="let item of collect_order; let i = index">
         <td>{{ i + 1 }}</td>
-        <td>{{ item.buyerId }}</td>
+        <td>{{ item.buyerId || 'N/A' }}</td>
         <td>{{ item.buyerName || 'N/A' }}</td>
         <td>{{ item.contactPerson || 'N/A' }}</td>
-        <td>{{ item.email }}</td>
-        <td>{{ item.phone }}</td>
-        <td>{{ item.address }}</td>
+        <td>{{ item.email || 'N/A' }}</td>
+        <td>{{ item.phone || 'N/A' }}</td>
+        <td>{{ item.address || 'N/A' }}</td>
         <td>
           <button class="btn btn-success" (click)="Edit(item)">Edit</button>
           <button class="btn btn-danger" (click)="Delete(item)">Delete</button>
@@ -31,5 +30,4 @@
       </tr>
     </tbody>
   </table>
-
 </div>
