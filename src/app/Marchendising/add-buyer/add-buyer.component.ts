@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Buyer } from '../../Model/buyer.model';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { BuyerServiceService } from '../../Services/buyer.service.service';
 
 @Component({
   selector: 'app-add-buyer',
@@ -11,12 +12,12 @@ import { FormsModule } from '@angular/forms';
 })
 export class AddBuyerComponent {
 
-  buy :Buyer =new Buyer
+  buy :Buyer =new Buyer();
 
   
   isUpdate=false;
 
-  constructor(private router:Router){
+  constructor(private router:Router,private buyerService:BuyerServiceService){
     
     const nav= this.router.getCurrentNavigation();
 
@@ -35,6 +36,7 @@ export class AddBuyerComponent {
 
     submission(){
        
+      /*
       let  orders: Buyer[]=JSON.parse(localStorage.getItem('b') || '[]');
 
       if(this.isUpdate){
@@ -61,6 +63,47 @@ export class AddBuyerComponent {
       this.buy=new Buyer();
 
       this.router.navigate(['/bl'])
+
+      */
+
+      // this is now real database part
+
+      if(this.isUpdate){
+
+        
+      this.buyerService.updateBuyerByService(this.buy.buyerId,this.buy).subscribe(()=>{
+
+        this.router.navigate(['/bl'])
+      })
+
+
+      }
+      // this is the end of if condition
+
+
+      else{
+
+
+        this.buyerService.createBuyerByService(this.buy).subscribe((res)=>{
+
+               console.log('save buyer'+res);
+          // this is used for clear the form
+
+          this.buy= new Buyer()
+
+          // this is used for show the list of the buyer
+          
+
+          this.router.navigate(['/bl'])
+        })
+
+
+      }
+
+
+
+
+
     }
 
 

@@ -3,11 +3,11 @@
   <form (ngSubmit)="submission()">
     <div>
       <label class="form-label">Shipping ID:</label>
-      <input type="text" name="shipping_id" class="form-control" [(ngModel)]="ship.shipping_id">
+      <input type="number" name="shipping_id" class="form-control" [(ngModel)]="ship.shipping_id">
     </div>
     <div>
       <label class="form-label">Order ID:</label>
-      <input type="text" name="order_id" class="form-control" [(ngModel)]="ship.order_id">
+      <input type="number" name="order_id" class="form-control" [(ngModel)]="ship.order_id">
     </div>
     <div>
       <label class="form-label">Shipping Date:</label>
@@ -15,7 +15,7 @@
     </div>
     <div>
       <label class="form-label">Shipped Qty:</label>
-      <input type="text" name="shipped_qty" class="form-control" [(ngModel)]="ship.shipped_qty">
+      <input type="number" name="shipped_qty" class="form-control" [(ngModel)]="ship.shipped_qty">
     </div>
     <div>
       <label class="form-label">Invoice No:</label>
@@ -32,7 +32,5 @@
     <div class="mt-4">
       <button type="submit" class="btn btn-success">Submit</button>
     </div>
-
   </form>
-  
 </div>
