@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FabricStore } from '../../Model/fabric.model';
 import { Router } from '@angular/router';
+import { FabricService } from '../../Services/fabricService/fabric.service';
 
 @Component({
   selector: 'app-add-fabric',
@@ -16,7 +17,7 @@ export class AddFabricComponent {
     
   isUpdate=false;
 
-  constructor(private router:Router){
+  constructor(private router:Router , private fabricService:FabricService){
     
     const nav= this.router.getCurrentNavigation();
 
@@ -34,7 +35,9 @@ export class AddFabricComponent {
     // this is the form Method
 
     submission(){
-       
+      
+      /**
+       *  
       let  orders: FabricStore[]=JSON.parse(localStorage.getItem('b') || '[]');
 
       if(this.isUpdate){
@@ -64,10 +67,26 @@ export class AddFabricComponent {
     }
 
 
+       */
+      
+      if(this.isUpdate){
 
+        this.fabricService.updateFabricByService(this.farbric.fabric_id!,this.farbric).subscribe(()=>{
+
+          this.router.navigate(['/fl'])
+        })
+      }
   
+      else{
+        this.fabricService.postFabricByService(this.farbric).subscribe(()=>{
+
+          this.router.navigate(['/fl'])
+
+          this.farbric=new FabricStore()
+        })
+      }
 
 }
 
-
+}
 

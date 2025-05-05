@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FabricStore } from '../../Model/fabric.model';
 import { Router } from '@angular/router';
+import { FabricService } from '../../Services/fabricService/fabric.service';
 
 @Component({
   selector: 'app-fabric-list',
@@ -15,7 +16,7 @@ export class FabricListComponent  implements OnInit{
 
   collect_order:FabricStore[]=[];
 
-  constructor(private router:Router){
+  constructor(private router:Router , private fabricService:FabricService){
 
 
   }
@@ -23,9 +24,26 @@ export class FabricListComponent  implements OnInit{
 
   ngOnInit(): void {
       
-    this.collect_order=JSON.parse(localStorage.getItem('b') || '[]');
+   // this.collect_order=JSON.parse(localStorage.getItem('b') || '[]');
+    
+    this.fetchAllFabric()
+
 
   }
+
+  // this is the method to get all the data from the database
+
+  fetchAllFabric(){
+
+    this.fabricService.getAllFabric().subscribe((data)=>{
+
+      this.collect_order=data;
+    })
+  }
+
+
+  // this is the method for edit
+
 
   Edit(a:FabricStore){
 
@@ -33,15 +51,27 @@ export class FabricListComponent  implements OnInit{
   }
 
   Delete(a:FabricStore){
-
+   
+    if(a.fabric_id !=null){
+       
+      
     if(confirm("are you want to delete?")){
 
 
-      this.collect_order=this.collect_order.filter(f=>f!==a);
+       // this.collect_order=this.collect_order.filter(f=>f!==a);
 
-      localStorage.setItem('b',JSON.stringify(this.collect_order))
+         // localStorage.setItem('b',JSON.stringify(this.collect_order))
+
+         this.fabricService.deleteFabricByService(a.fabric_id).subscribe(()=>{
+
+           this.fetchAllFabric()
+         })
+
+         
     }
   }
+
+    }
 
 }
 

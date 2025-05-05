@@ -1,5 +1,5 @@
 export class FabricStore {
-  fabric_id: number;
+  fabric_id?: number;
   order_id: number;
   fabric_type: string;
   fabric_qty: number;
@@ -7,7 +7,7 @@ export class FabricStore {
   available_stock: number;
 
   constructor() {
-    this.fabric_id = 0;  // Initializing fabric_id as a number
+    //this.fabric_id = 0;  // Initializing fabric_id as a number
     this.order_id = 0;   // Initializing order_id as a number
     this.fabric_type = '';
     this.fabric_qty = 0;
