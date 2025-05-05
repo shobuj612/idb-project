@@ -1,5 +1,5 @@
 export class QualityControl {
-    qc_id: number;
+    qc_id?: number;
     order_id: number;
     inspection_date: Date;
     passed_qty: number;
@@ -7,7 +7,7 @@ export class QualityControl {
     remarks: string;
   
     constructor() {
-      this.qc_id = 0;          // Initializing qc_id as a number
+      //this.qc_id = 0;          // Initializing qc_id as a number
       this.order_id = 0;       // Initializing order_id as a number
       this.inspection_date = new Date();
       this.passed_qty = 0;

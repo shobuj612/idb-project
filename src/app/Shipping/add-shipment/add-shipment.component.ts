@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Shipping } from '../../Model/shipping.model';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ShippingService } from '../../Services/shippingService/shipping.service';
 
 @Component({
   selector: 'app-add-shipment',
@@ -16,7 +17,7 @@ export class AddShipmentComponent {
   
   isUpdate=false;
 
-  constructor(private router:Router){
+  constructor(private router:Router , private shipService:ShippingService){
     
     const nav= this.router.getCurrentNavigation();
 
@@ -35,7 +36,9 @@ export class AddShipmentComponent {
 
     submission(){
        
-      let  orders: Shipping[]=JSON.parse(localStorage.getItem('b') || '[]');
+      /**
+       * 
+       * let  orders: Shipping[]=JSON.parse(localStorage.getItem('b') || '[]');
 
       if(this.isUpdate){
 
@@ -61,6 +64,29 @@ export class AddShipmentComponent {
       this.ship=new Shipping();
 
       this.router.navigate(['/shiplist'])
+
+       */
+
+
+      if(this.isUpdate){
+
+        this.shipService.updateShippingByService(this.ship.shipping_id!,this.ship).subscribe(()=>{
+
+           this.router.navigate(['/shiplist'])
+        })
+      }
+
+        else{
+
+           this.shipService.postShippingByService(this.ship).subscribe(()=>{
+
+             this.router.navigate(['/shiplist'])
+
+             this.ship=new Shipping()
+
+           })
+
+        }
     }
 
 

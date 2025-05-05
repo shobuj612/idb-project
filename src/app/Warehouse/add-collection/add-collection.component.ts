@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Warehouse } from '../../Model/warehouse.model';
 import { Router } from '@angular/router';
+import { WareService } from '../../Services/warehouseService/ware.service';
 
 @Component({
   selector: 'app-add-collection',
@@ -16,7 +17,7 @@ export class AddCollectionComponent {
   
   isUpdate=false;
 
-  constructor(private router:Router){
+  constructor(private router:Router , private warService:WareService){
     
     const nav= this.router.getCurrentNavigation();
 
@@ -35,7 +36,9 @@ export class AddCollectionComponent {
 
     submission(){
        
-      let  orders: Warehouse[]=JSON.parse(localStorage.getItem('b') || '[]');
+      /**
+       * 
+       * let  orders: Warehouse[]=JSON.parse(localStorage.getItem('b') || '[]');
 
       if(this.isUpdate){
 
@@ -61,9 +64,31 @@ export class AddCollectionComponent {
       this.ware=new Warehouse();
 
       this.router.navigate(['/cwl'])
+      
     }
+       */
+
+    if(this.isUpdate){
 
 
+      this.warService.updateWareByService(this.ware.warehouse_id!,this.ware).subscribe(()=>{
+           
+          this.router.navigate(['/cwl'])
+
+      })
+    }
+         
+       else{
+
+        this.warService.createWareByService(this.ware).subscribe(()=>{
+
+          this.router.navigate(['/cwl'])
+
+          this.ware= new Warehouse()
+        })
+       }
+
+    }
 
   }
 

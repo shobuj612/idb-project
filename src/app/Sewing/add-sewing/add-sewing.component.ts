@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Sewing } from '../../Model/sewing.model';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { SewingService } from '../../Services/sewingService/sewing.service';
 
 @Component({
   selector: 'app-add-sewing',
@@ -16,7 +17,7 @@ export class AddSewingComponent {
    
   isUpdate=false;
 
-  constructor(private router:Router){
+  constructor(private router:Router,private sewService:SewingService){
     
     const nav= this.router.getCurrentNavigation();
 
@@ -35,7 +36,9 @@ export class AddSewingComponent {
 
     submission(){
        
-      let  orders: Sewing[]=JSON.parse(localStorage.getItem('b') || '[]');
+     /**
+      * 
+      *  let  orders: Sewing[]=JSON.parse(localStorage.getItem('b') || '[]');
 
       if(this.isUpdate){
 
@@ -61,6 +64,28 @@ export class AddSewingComponent {
       this.sew=new Sewing();
 
       this.router.navigate(['/sl'])
+      */
+       
+
+      if(this.isUpdate){
+
+
+          this.sewService.updateByService(this.sew.sewing_id!,this.sew).subscribe(()=>{
+
+
+             this.router.navigate(['/sl'])
+          })
+      }
+       
+      else{
+
+         this.sewService.postSewingByService(this.sew).subscribe(()=>{
+
+              this.router.navigate(['/sl'])
+
+              this.sew= new Sewing()
+         })
+      }
     }
 
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Shipping } from '../../Model/shipping.model';
 import { Router } from '@angular/router';
+import { ShippingService } from '../../Services/shippingService/shipping.service';
 
 @Component({
   selector: 'app-shipmentlist',
@@ -15,33 +16,65 @@ export class ShipmentlistComponent implements OnInit {
 
   collect_order:Shipping[]=[];
 
-  constructor(private router:Router){
+  constructor(private router:Router  , private shipService:ShippingService){
 
 
   }
 
 
   ngOnInit(): void {
+
+    this.fetchAllShip()
+
+
       
-    this.collect_order=JSON.parse(localStorage.getItem('b') || '[]');
+   // this.collect_order=JSON.parse(localStorage.getItem('b') || '[]');
 
   }
+
+
+  // this is the method to get all the data from the database
+
+   fetchAllShip(){
+
+    this.shipService.getAllShippingByService().subscribe((data)=>{
+
+        this.collect_order=data;
+    })
+   }
+
+
+   // this is the method to edit somethin in the database
+
 
   Edit(a:Shipping){
 
     this.router.navigate(['/addship'],{state:{a}})
   }
 
-  Delete(a:Shipping){
+  Delete(a:Shipping) :void {
 
-    if(confirm("are you want to delete?")){
+    if(a.shipping_id !=null){
 
+      if(confirm("are you want to delete?")){
 
-      this.collect_order=this.collect_order.filter(f=>f!==a);
+         this.shipService.deleteShippingByService(a.shipping_id).subscribe(()=>{
 
-      localStorage.setItem('b',JSON.stringify(this.collect_order))
+               this.fetchAllShip()
+
+         })   
+
+       //this.collect_order=this.collect_order.filter(f=>f!==a);
+  
+        //localStorage.setItem('b',JSON.stringify(this.collect_order))
+      }
     }
-  }
+
+    else{
+
+      alert('Invalid Id?')
+    }
+    }
 
 }
 

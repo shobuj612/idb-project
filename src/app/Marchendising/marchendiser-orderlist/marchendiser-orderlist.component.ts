@@ -42,14 +42,20 @@ export class MarchendiserOrderlistComponent  implements OnInit{
 
   }
 
+    // this is the method to edit in the database
+
+
   Edit(a:Merchandising){
 
     this.router.navigate(['/am'],{state:{a}})
   }
 
-  Delete(a:Merchandising){
+   // this is the method to delete data from the databse
 
-    if(a.merch_id!=null){
+   
+  Delete(a:Merchandising) : void {
+
+    if(a.merch_id !=null){
 
       if(confirm("are you want to delete?")){
 

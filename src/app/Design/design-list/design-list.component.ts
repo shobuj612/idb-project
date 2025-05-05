@@ -46,7 +46,7 @@ export class DesignListComponent  implements OnInit{
     this.router.navigate(['/ad'],{state:{a}})
   }
 
-  Delete(a:Design){
+  Delete(a:Design): void {
 
    if(a.design_id !=null){
 

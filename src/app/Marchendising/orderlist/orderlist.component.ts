@@ -45,9 +45,9 @@ export class OrderlistComponent  implements OnInit{
     this.router.navigate(['/ao'],{state:{a}})
   }
 
-  Delete(a:Order){
+  Delete(a:Order) :void {
 
-    if(a.order_id!=null){
+    if(a.order_id !=null){
 
       if(confirm("are you want to delete?")){
 

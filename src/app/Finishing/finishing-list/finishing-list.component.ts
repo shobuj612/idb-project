@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Finishing } from '../../Model/fInishing.model';
 import { Router } from '@angular/router';
+import { FinishService } from '../../Services/finishingSevice/finish.service';
 
 @Component({
   selector: 'app-finishing-list',
@@ -14,7 +15,7 @@ export class FinishingListComponent implements OnInit {
   
   collect_order:Finishing[]=[];
 
-  constructor(private router:Router){
+  constructor(private router:Router , private finisService:FinishService){
 
 
   }
@@ -22,25 +23,56 @@ export class FinishingListComponent implements OnInit {
 
   ngOnInit(): void {
       
-    this.collect_order=JSON.parse(localStorage.getItem('b') || '[]');
+    this.fetchAllFinsihing()
+    //this.collect_order=JSON.parse(localStorage.getItem('b') || '[]');
 
   }
+
+  // this is the method to get all the  data from the database
+
+
+  fetchAllFinsihing(){
+
+    this.finisService.getAllFinish().subscribe((data)=>{
+
+
+      this.collect_order=data;
+    })
+  }
+
+
+   // this is the edit method for the form
 
   Edit(a:Finishing){
 
     this.router.navigate(['/afi'],{state:{a}})
   }
 
-  Delete(a:Finishing){
 
-    if(confirm("are you want to delete?")){
+  // this is the method for deleting data from the databse
 
 
-      this.collect_order=this.collect_order.filter(f=>f!==a);
+  Delete(a:Finishing) :void {
 
-      localStorage.setItem('b',JSON.stringify(this.collect_order))
+    if(a.finish_id !=null){
+
+      if(confirm("are you want to delete?")){
+
+       
+        this.finisService.deleteFinishingByService(a.finish_id).subscribe(()=>{
+
+          this.fetchAllFinsihing()
+        })
+       // this.collect_order=this.collect_order.filter(f=>f!==a);
+  
+       // localStorage.setItem('b',JSON.stringify(this.collect_order))
+      }
     }
-  }
+
+    else{
+      alert('Invalid Id?')
+    }
+    }
 
 }
 

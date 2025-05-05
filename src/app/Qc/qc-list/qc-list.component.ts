@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { QualityControl } from '../../Model/qualitycontrol.model';
+import { QcService } from '../../Services/qcService/qc.service';
 
 @Component({
   selector: 'app-qc-list',
@@ -16,7 +17,7 @@ export class QcListComponent implements OnInit {
 
   collect_order:QualityControl[]=[];
 
-  constructor(private router:Router){
+  constructor(private router:Router , private qcService:QcService){
 
 
   }
@@ -24,24 +25,57 @@ export class QcListComponent implements OnInit {
 
   ngOnInit(): void {
       
-    this.collect_order=JSON.parse(localStorage.getItem('b') || '[]');
+     this.fetchAllQc()
+
+      
+    //this.collect_order=JSON.parse(localStorage.getItem('b') || '[]');
 
   }
+
+
+  // this is  the method to get all the data from the databse
+
+
+  fetchAllQc(){
+
+    this.qcService.getAllQcByService().subscribe((data)=>{
+
+       this.collect_order=data;
+    })
+  }
+
+   // this is the method to edit in the form
 
   Edit(a:QualityControl){
 
     this.router.navigate(['/aq'],{state:{a}})
   }
 
-  Delete(a:QualityControl){
 
-    if(confirm("are you want to delete?")){
+    // this is the method to delete data from the database
 
 
-      this.collect_order=this.collect_order.filter(f=>f!==a);
+  Delete(a:QualityControl) : void {
 
-      localStorage.setItem('b',JSON.stringify(this.collect_order))
-    }
+      if(a.qc_id !=null){
+
+        if(confirm("are you want to delete?")){
+
+           this.qcService.deleteQcByService(a.qc_id).subscribe(()=>{
+
+              this.fetchAllQc()
+
+           })
+          //this.collect_order=this.collect_order.filter(f=>f!==a);
+    
+          //localStorage.setItem('b',JSON.stringify(this.collect_order))
+        }
+      }
+
+      else{
+
+        alert('Invalid Id?')
+      }
   }
 
 }

@@ -50,7 +50,7 @@ export class FabricListComponent  implements OnInit{
     this.router.navigate(['/af'],{state:{a}})
   }
 
-  Delete(a:FabricStore){
+  Delete(a:FabricStore):void {
    
     if(a.fabric_id !=null){
        
@@ -70,6 +70,11 @@ export class FabricListComponent  implements OnInit{
          
     }
   }
+
+   else{
+
+     alert('Invalid Id?')
+   }
 
     }
 

@@ -45,7 +45,7 @@ export class CuttingListComponent implements OnInit{
     this.router.navigate(['/ac'],{state:{a}})
   }
 
-  Delete(a:Cutting){
+  Delete(a:Cutting):void {
 
     if(a.cutting_id !=null){
 
@@ -58,7 +58,7 @@ export class CuttingListComponent implements OnInit{
 
       this.cutService.deleteDesignByService(a.cutting_id).subscribe(()=>{
 
-        this.fetchAllCut()
+               this.fetchAllCut()
       })
       }
     }

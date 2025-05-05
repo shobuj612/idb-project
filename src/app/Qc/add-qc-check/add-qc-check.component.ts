@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { QualityControl } from '../../Model/qualitycontrol.model';
 import { Router } from '@angular/router';
+import { QcService } from '../../Services/qcService/qc.service';
 
 @Component({
   selector: 'app-add-qc-check',
@@ -15,7 +16,7 @@ export class AddQcCheckComponent {
   
   isUpdate=false;
 
-  constructor(private router:Router){
+  constructor(private router:Router , private qcService:QcService){
     
     const nav= this.router.getCurrentNavigation();
 
@@ -33,7 +34,8 @@ export class AddQcCheckComponent {
     // this is the form Method
 
     submission(){
-       
+     /**
+      *   
       let  orders: QualityControl[]=JSON.parse(localStorage.getItem('b') || '[]');
 
       if(this.isUpdate){
@@ -60,6 +62,30 @@ export class AddQcCheckComponent {
       this.qc=new QualityControl();
 
       this.router.navigate(['/ql'])
+
+      */
+
+
+      if(this.isUpdate){
+
+        this.qcService.updateQcByService(this.qc.qc_id!,this.qc).subscribe(()=>{
+
+          this.router.navigate(['/ql'])
+
+        })
+      }
+
+      else{
+
+        this.qcService.postQcByService(this.qc).subscribe(()=>{
+
+          this.router.navigate(['/ql'])
+
+          this.qc= new QualityControl();
+
+        })
+      }
+
     }
 
 

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Finishing } from '../../Model/fInishing.model';
 import { Router } from '@angular/router';
+import { FinishService } from '../../Services/finishingSevice/finish.service';
 
 @Component({
   selector: 'app-add-finishing',
@@ -17,7 +18,7 @@ export class AddFinishingComponent {
    
   isUpdate=false;
 
-  constructor(private router:Router){
+  constructor(private router:Router , private finsisService:FinishService){
     
     const nav= this.router.getCurrentNavigation();
 
@@ -35,7 +36,9 @@ export class AddFinishingComponent {
     // this is the form Method
 
     submission(){
-       
+      /**
+       * 
+       *  
       let  orders: Finishing[]=JSON.parse(localStorage.getItem('b') || '[]');
 
       if(this.isUpdate){
@@ -65,6 +68,29 @@ export class AddFinishingComponent {
     }
 
 
+       */
+
+
+     if(this.isUpdate){
+
+      this.finsisService.updateFinisngByService(this.finish.finish_id!,this.finish).subscribe(()=>{
+
+
+        this.router.navigate(['/fli'])
+      })
+     }
+     
+
+     else{
+
+        this.finsisService.postFinishingByService(this.finish).subscribe(()=>{
+
+          this.router.navigate(['/fli'])
+
+          this.finish=new Finishing()
+        })
+     }
+    }
 
   }
 
