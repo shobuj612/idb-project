@@ -5,6 +5,7 @@ import { SewingService } from '../../Services/sewingService/sewing.service';
 
 @Component({
   selector: 'app-sewing-list',
+  standalone:true,
   imports: [],
   templateUrl: './sewing-list.component.html',
   styleUrl: './sewing-list.component.css'

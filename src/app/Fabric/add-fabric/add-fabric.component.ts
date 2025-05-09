@@ -6,6 +6,7 @@ import { FabricService } from '../../Services/fabricService/fabric.service';
 
 @Component({
   selector: 'app-add-fabric',
+  standalone:true,
   imports: [FormsModule],
   templateUrl: './add-fabric.component.html',
   styleUrl: './add-fabric.component.css'

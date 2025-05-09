@@ -5,6 +5,7 @@ import { ShippingService } from '../../Services/shippingService/shipping.service
 
 @Component({
   selector: 'app-shipmentlist',
+  standalone:true,
   imports: [],
   templateUrl: './shipmentlist.component.html',
   styleUrl: './shipmentlist.component.css'

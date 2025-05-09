@@ -6,6 +6,7 @@ import { FinishService } from '../../Services/finishingSevice/finish.service';
 
 @Component({
   selector: 'app-add-finishing',
+  standalone:true,
   imports: [FormsModule],
   templateUrl: './add-finishing.component.html',
   styleUrl: './add-finishing.component.css'

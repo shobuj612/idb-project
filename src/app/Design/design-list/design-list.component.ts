@@ -5,6 +5,7 @@ import { DesignService } from '../../Services/DesignSerivce/design.service';
 
 @Component({
   selector: 'app-design-list',
+  standalone:true,
   imports: [],
   templateUrl: './design-list.component.html',
   styleUrl: './design-list.component.css'

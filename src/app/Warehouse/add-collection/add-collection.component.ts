@@ -6,6 +6,7 @@ import { WareService } from '../../Services/warehouseService/ware.service';
 
 @Component({
   selector: 'app-add-collection',
+  standalone:true,
   imports: [FormsModule],
   templateUrl: './add-collection.component.html',
   styleUrl: './add-collection.component.css'

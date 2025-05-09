@@ -5,6 +5,7 @@ import { WareService } from '../../Services/warehouseService/ware.service';
 
 @Component({
   selector: 'app-collectioin-list',
+  standalone:true,
   imports: [],
   templateUrl: './collectioin-list.component.html',
   styleUrl: './collectioin-list.component.css'

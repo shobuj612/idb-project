@@ -27,34 +27,58 @@ import { AddCollectionComponent } from './Warehouse/add-collection/add-collectio
 import { CollectioinListComponent } from './Warehouse/collectioin-list/collectioin-list.component';
 import { ShipmentlistComponent } from './Shipping/shipmentlist/shipmentlist.component';
 import { AddShipmentComponent } from './Shipping/add-shipment/add-shipment.component';
-
-export const routes: Routes = [
-    {path:'',component:HomeComponent},
-    {path:'about',component:AboutComponent},
-    {path:'contact',component:ContactComponent},
-    {path:'tender',component:TenderComponent},
-    {path:'etender',component:ETenderComponent},
-    {path:'circuler',component:CirculerComponent},
-    {path:'bl',component:BuyerListComponent},
-    {path:'ab',component:AddBuyerComponent},
-    {path:'ao',component:AddOrderComponent},
-    {path:'ol',component:OrderlistComponent},
-    {path:'am',component:AddMarchendiserOrderComponent},
-    {path:'ml',component:MarchendiserOrderlistComponent},
-    {path:'ad',component:AddDesignComponent},
-    {path:'dl',component:DesignListComponent},
-    {path:'fl',component:FabricListComponent},
-    {path:'af',component:AddFabricComponent},
-    {path:'ac',component:AddCuttingComponent},
-    {path:'cl',component:CuttingListComponent},
-    {path:'as',component:AddSewingComponent},
-    {path:'sl',component:SewingListComponent},
-    {path:'afi',component:AddFinishingComponent},
-    {path:'fli',component:FinishingListComponent},
-    {path:'aq',component:AddQcCheckComponent},
-    {path:'ql',component:QcListComponent},
-    {path:'aw',component:AddCollectionComponent},
-    {path:'cwl',component:CollectioinListComponent},
-    {path:'shiplist',component:ShipmentlistComponent},
-    {path:'addship',component:AddShipmentComponent}
-];
+import { Roles } from './Role/role';
+import { RoleGuard } from './Guard/role.guard';
+import { LoginComponent } from './login/login.component';
+ export const routes: Routes = [
+    { path: '', component: HomeComponent },
+    { path: 'about', component: AboutComponent },
+    { path: 'contact', component: ContactComponent },
+    { path: 'tender', component: TenderComponent },
+    { path: 'etender', component: ETenderComponent },
+    { path: 'circuler', component: CirculerComponent },
+    { path: 'login', component: LoginComponent },
+  
+    // Marchendising
+    { path: 'buyer-list', component: BuyerListComponent, canActivate: [RoleGuard], data: { roles: [Roles.MARCH] } },
+    { path: 'add-buyer', component: AddBuyerComponent, canActivate: [RoleGuard], data: { roles: [Roles.MARCH] } },
+    { path: 'add-order', component: AddOrderComponent, canActivate: [RoleGuard], data: { roles: [Roles.MARCH] } },
+    { path: 'order-list', component: OrderlistComponent, canActivate: [RoleGuard], data: { roles: [Roles.MARCH] } },
+    { path: 'add-march-order', component: AddMarchendiserOrderComponent, canActivate: [RoleGuard], data: { roles: [Roles.MARCH] } },
+    { path: 'march-order-list', component: MarchendiserOrderlistComponent, canActivate: [RoleGuard], data: { roles: [Roles.MARCH] } },
+  
+    // Design
+    { path: 'add-design', component: AddDesignComponent, canActivate: [RoleGuard], data: { roles: [Roles.DESIGN, Roles.MARCH] } },
+    { path: 'design-list', component: DesignListComponent, canActivate: [RoleGuard], data: { roles: [Roles.DESIGN, Roles.MARCH] } },
+  
+    // Fabric
+    { path: 'add-fabric', component: AddFabricComponent, canActivate: [RoleGuard], data: { roles: [Roles.FABRIC, Roles.MARCH] } },
+    { path: 'fabric-list', component: FabricListComponent, canActivate: [RoleGuard], data: { roles: [Roles.FABRIC, Roles.MARCH] } },
+  
+    // Cutting
+    { path: 'add-cutting', component: AddCuttingComponent, canActivate: [RoleGuard], data: { roles: [Roles.CUTTING, Roles.MARCH] } },
+    { path: 'cutting-list', component: CuttingListComponent, canActivate: [RoleGuard], data: { roles: [Roles.CUTTING, Roles.MARCH] } },
+  
+    // Sewing
+    { path: 'add-sewing', component: AddSewingComponent, canActivate: [RoleGuard], data: { roles: [Roles.SEWING, Roles.MARCH] } },
+    { path: 'sewing-list', component: SewingListComponent, canActivate: [RoleGuard], data: { roles: [Roles.SEWING, Roles.MARCH] } },
+  
+    // Finishing
+    { path: 'add-finishing', component: AddFinishingComponent, canActivate: [RoleGuard], data: { roles: [Roles.FINISHING, Roles.MARCH] } },
+    { path: 'finishing-list', component: FinishingListComponent, canActivate: [RoleGuard], data: { roles: [Roles.FINISHING, Roles.MARCH] } },
+  
+    // QC
+    { path: 'add-qc', component: AddQcCheckComponent, canActivate: [RoleGuard], data: { roles: [Roles.QC, Roles.MARCH] } },
+    { path: 'qc-list', component: QcListComponent, canActivate: [RoleGuard], data: { roles: [Roles.QC, Roles.MARCH] } },
+  
+    // Warehouse
+    { path: 'add-collection', component: AddCollectionComponent, canActivate: [RoleGuard], data: { roles: [Roles.WAREHOUSE, Roles.MARCH] } },
+    { path: 'collection-list', component: CollectioinListComponent, canActivate: [RoleGuard], data: { roles: [Roles.WAREHOUSE, Roles.MARCH] } },
+  
+    // Shipping
+    { path: 'add-shipment', component: AddShipmentComponent, canActivate: [RoleGuard], data: { roles: [Roles.SHIPPING, Roles.MARCH] } },
+    { path: 'shipment-list', component: ShipmentlistComponent, canActivate: [RoleGuard], data: { roles: [Roles.SHIPPING, Roles.MARCH] } },
+  
+    // Fallback
+    { path: '**', redirectTo: 'login', pathMatch: 'full' }
+  ];

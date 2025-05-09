@@ -6,6 +6,7 @@ import { DesignService } from '../../Services/DesignSerivce/design.service';
 
 @Component({
   selector: 'app-add-design',
+  standalone:true,
   imports: [FormsModule],
   templateUrl: './add-design.component.html',
   styleUrl: './add-design.component.css'

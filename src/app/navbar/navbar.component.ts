@@ -1,11 +1,32 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../SecurityService/auth.service';  // Correct path to your AuthService
+import { NgIf } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
-  imports: [],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.css'
+  standalone: true,
+  imports: [NgIf,RouterModule],
+  templateUrl: './navbar.component.html'
 })
 export class NavbarComponent {
+
+
+  constructor(public authService: AuthService, private router:Router) {}
+
+
+
+
+  // Updated method to use getUserRoles() from AuthService
+  hasRole(role: string): boolean {
+    return this.authService.getUserRoles().includes(role);
+  }
+
+  //  this is logout method call in  the  navbar.ts
+
+  onLogout() {
+    this.authService.logout();
+    this.router.navigate(['/login']); // Redirect to the login page after logout
+  }
 
 }

@@ -6,6 +6,7 @@ import { BuyerServiceService } from '../../Services/buyer.service.service';
 
 @Component({
   selector: 'app-add-buyer',
+  standalone:true,
   imports: [FormsModule],
   templateUrl: './add-buyer.component.html',
   styleUrl: './add-buyer.component.css'

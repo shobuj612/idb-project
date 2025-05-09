@@ -6,6 +6,7 @@ import { SewingService } from '../../Services/sewingService/sewing.service';
 
 @Component({
   selector: 'app-add-sewing',
+  standalone:true,
   imports: [FormsModule],
   templateUrl: './add-sewing.component.html',
   styleUrl: './add-sewing.component.css'

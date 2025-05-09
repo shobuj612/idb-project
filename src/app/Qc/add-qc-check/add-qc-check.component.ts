@@ -6,6 +6,7 @@ import { QcService } from '../../Services/qcService/qc.service';
 
 @Component({
   selector: 'app-add-qc-check',
+  standalone:true,
   imports: [FormsModule],
   templateUrl: './add-qc-check.component.html',
   styleUrl: './add-qc-check.component.css'

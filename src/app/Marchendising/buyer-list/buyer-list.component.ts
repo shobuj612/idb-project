@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-buyer-list',
+  standalone:true,
   imports: [CommonModule],
   templateUrl: './buyer-list.component.html',
   styleUrl: './buyer-list.component.css'

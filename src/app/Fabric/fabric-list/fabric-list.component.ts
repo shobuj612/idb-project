@@ -5,6 +5,7 @@ import { FabricService } from '../../Services/fabricService/fabric.service';
 
 @Component({
   selector: 'app-fabric-list',
+  standalone:true,
   imports: [],
   templateUrl: './fabric-list.component.html',
   styleUrl: './fabric-list.component.css'

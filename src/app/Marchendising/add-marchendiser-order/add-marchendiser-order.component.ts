@@ -6,6 +6,7 @@ import { MarchService } from '../../Services/marService/march.service';
 
 @Component({
   selector: 'app-add-marchendiser-order',
+  standalone:true,
   imports: [FormsModule],
   templateUrl: './add-marchendiser-order.component.html',
   styleUrl: './add-marchendiser-order.component.css'

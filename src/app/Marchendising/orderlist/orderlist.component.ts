@@ -5,6 +5,7 @@ import { OrderService } from '../../Services/OrderService/order.service';
 
 @Component({
   selector: 'app-orderlist',
+  standalone:true,
   imports: [],
   templateUrl: './orderlist.component.html',
   styleUrl: './orderlist.component.css'

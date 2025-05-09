@@ -6,6 +6,7 @@ import { CutService } from '../../Services/cutService/cut.service';
 
 @Component({
   selector: 'app-add-cutting',
+  standalone:true,
   imports: [FormsModule],
   templateUrl: './add-cutting.component.html',
   styleUrl: './add-cutting.component.css'

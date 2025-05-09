@@ -5,6 +5,7 @@ import { CutService } from '../../Services/cutService/cut.service';
 
 @Component({
   selector: 'app-cutting-list',
+  standalone:true,
   imports: [],
   templateUrl: './cutting-list.component.html',
   styleUrl: './cutting-list.component.css'

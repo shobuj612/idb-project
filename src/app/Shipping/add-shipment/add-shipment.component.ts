@@ -6,6 +6,7 @@ import { ShippingService } from '../../Services/shippingService/shipping.service
 
 @Component({
   selector: 'app-add-shipment',
+  standalone:true,
   imports: [FormsModule],
   templateUrl: './add-shipment.component.html',
   styleUrl: './add-shipment.component.css'

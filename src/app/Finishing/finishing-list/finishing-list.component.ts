@@ -5,6 +5,7 @@ import { FinishService } from '../../Services/finishingSevice/finish.service';
 
 @Component({
   selector: 'app-finishing-list',
+  standalone:true,
   imports: [],
   templateUrl: './finishing-list.component.html',
   styleUrl: './finishing-list.component.css'

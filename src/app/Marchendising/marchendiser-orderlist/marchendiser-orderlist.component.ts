@@ -5,6 +5,7 @@ import { MarchService } from '../../Services/marService/march.service';
 
 @Component({
   selector: 'app-marchendiser-orderlist',
+  standalone:true,
   imports: [],
   templateUrl: './marchendiser-orderlist.component.html',
   styleUrl: './marchendiser-orderlist.component.css'

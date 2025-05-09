@@ -5,6 +5,7 @@ import { QcService } from '../../Services/qcService/qc.service';
 
 @Component({
   selector: 'app-qc-list',
+  standalone:true,
   imports: [],
   templateUrl: './qc-list.component.html',
   styleUrl: './qc-list.component.css'
