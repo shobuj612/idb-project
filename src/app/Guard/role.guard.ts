@@ -16,9 +16,7 @@ export class RoleGuard implements CanActivate {
     }
 
     const requiredRoles = route.data['roles'] as string[];
-    const userRoles = this.authService.getUserRoles();
-
-    const hasAccess = requiredRoles.some(role => userRoles.includes(role));
+    const hasAccess = requiredRoles.some(role => this.authService.hasRole(role)); // Use hasRole method
 
     if (!hasAccess) {
       this.router.navigate(['/unauthorized']);
@@ -27,4 +25,5 @@ export class RoleGuard implements CanActivate {
 
     return true;
   }
+
 }

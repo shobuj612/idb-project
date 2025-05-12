@@ -1,4 +1,154 @@
+
+
 <!-- Horizontal Navbar -->
+<nav class="navbar navbar-expand-sm justify-content-between fixed-top"
+     style="border: 3px solid #a0a1a3; background-color: #c5cedb;">
+  <ul class="navbar-nav">
+    <li class="nav-item"><a routerLink="/" class="nav-link text-success">Home</a></li>
+    <li class="nav-item"><a routerLink="/about" class="nav-link text-success">About</a></li>
+    <li class="nav-item"><a routerLink="/contact" class="nav-link text-success">Contact</a></li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link dropdown-toggle text-success" data-bs-toggle="dropdown">Notice</a>
+      <ul class="dropdown-menu">
+        <li><a routerLink="/tender" class="dropdown-item bg-light text-success">Tender</a></li>
+        <li><a routerLink="/etender" class="dropdown-item bg-dark text-success">e-Tender</a></li>
+        <li><a routerLink="/circuler" class="dropdown-item bg-info text-success">Circular</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <!-- Right-aligned Login/Logout -->
+  <ul class="navbar-nav">
+    <li class="nav-item" *ngIf="!authService.isLoggedIn()">
+      <a routerLink="/login" class="btn btn-info text-success nav-link">Login</a>
+    </li>
+    <li class="nav-item" *ngIf="authService.isLoggedIn()">
+      <button (click)="onLogout()" class="btn btn-info text-success nav-link">Logout</button>
+    </li>
+  </ul>
+</nav>
+
+<!-- Vertical Sidebar -->
+<nav class="position-fixed p-3"
+     style="top: 56px; left: 0; height: calc(100vh - 56px); width: 250px; border: 3px solid #a0a1a3; background-color: #80ff80;">
+  <ul class="nav flex-column">
+
+    <!-- Marchendising -->
+    <li *ngIf="hasRole('ROLE_MARCH')" class="nav-item dropdown">
+      <button class="nav-link dropdown-toggle btn w-100 text-start" data-bs-toggle="dropdown">
+        Marchendising
+      </button>
+      <ul class="dropdown-menu w-100">
+        <li><a routerLink="/bl" class="dropdown-item">Buyer List</a></li>
+        <li><a routerLink="/ab" class="dropdown-item">Add Buyer</a></li>
+        <li><a routerLink="/ol" class="dropdown-item">Order List</a></li>
+        <li><a routerLink="/ao" class="dropdown-item">Add Order</a></li>
+        <li><a routerLink="/ml" class="dropdown-item">Order Control</a></li>
+        <li><a routerLink="/am" class="dropdown-item">Add Order Control</a></li>
+        <li><a routerLink="/send-order" class="dropdown-item">Send Order</a></li>
+        <li><a routerLink="/collect-design" class="dropdown-item">Collect Design</a></li>
+      </ul>
+    </li>
+
+    <!-- Design -->
+    <li *ngIf="hasRole('ROLE_MARCH') || hasRole('ROLE_DESIGN')" class="nav-item dropdown">
+      <button class="nav-link dropdown-toggle btn w-100 text-start" data-bs-toggle="dropdown">
+        Design
+      </button>
+      <ul class="dropdown-menu w-100">
+        <li><a routerLink="/dl" class="dropdown-item">Design List</a></li>
+        <li><a routerLink="/ad" class="dropdown-item">Add Design</a></li>
+        <li><a routerLink="/send-design" class="dropdown-item">Send Design</a></li>
+      </ul>
+    </li>
+
+    <!-- Fabric -->
+    <li *ngIf="hasRole('ROLE_MARCH') || hasRole('ROLE_FABRIC')" class="nav-item dropdown">
+      <button class="nav-link dropdown-toggle btn w-100 text-start" data-bs-toggle="dropdown">
+        Fabric
+      </button>
+      <ul class="dropdown-menu w-100">
+        <li><a routerLink="/fl" class="dropdown-item">Fabric List</a></li>
+        <li><a routerLink="/af" class="dropdown-item">Add Fabric</a></li>
+        <li><a routerLink="/send-fabric" class="dropdown-item">Send Fabric</a></li>
+      </ul>
+    </li>
+
+    <!-- Cutting -->
+    <li *ngIf="hasRole('ROLE_MARCH') || hasRole('ROLE_CUTTING')" class="nav-item dropdown">
+      <button class="nav-link dropdown-toggle btn w-100 text-start" data-bs-toggle="dropdown">
+        Cutting
+      </button>
+      <ul class="dropdown-menu w-100">
+        <li><a routerLink="/cl" class="dropdown-item">Cutting List</a></li>
+        <li><a routerLink="/ac" class="dropdown-item">Add Cutting</a></li>
+        <li><a routerLink="/fabric-info" class="dropdown-item">Fabric Info</a></li>
+        <li><a routerLink="/add-fabric-info" class="dropdown-item">Add Fabric Info</a></li>
+      </ul>
+    </li>
+
+    <!-- Sewing -->
+    <li *ngIf="hasRole('ROLE_MARCH') || hasRole('ROLE_SEWING')" class="nav-item dropdown">
+      <button class="nav-link dropdown-toggle btn w-100 text-start" data-bs-toggle="dropdown">
+        Sewing
+      </button>
+      <ul class="dropdown-menu w-100">
+        <li><a routerLink="/sl" class="dropdown-item">Sewing List</a></li>
+        <li><a routerLink="/as" class="dropdown-item">Add Sewing</a></li>
+      </ul>
+    </li>
+
+    <!-- Finishing -->
+    <li *ngIf="hasRole('ROLE_MARCH') || hasRole('ROLE_FINISHING')" class="nav-item dropdown">
+      <button class="nav-link dropdown-toggle btn w-100 text-start" data-bs-toggle="dropdown">
+        Finishing
+      </button>
+      <ul class="dropdown-menu w-100">
+        <li><a routerLink="/fli" class="dropdown-item">Finishing List</a></li>
+        <li><a routerLink="/afi" class="dropdown-item">Add Finishing</a></li>
+      </ul>
+    </li>
+
+    <!-- QC -->
+    <li *ngIf="hasRole('ROLE_MARCH') || hasRole('ROLE_QC')" class="nav-item dropdown">
+      <button class="nav-link dropdown-toggle btn w-100 text-start" data-bs-toggle="dropdown">
+        QC
+      </button>
+      <ul class="dropdown-menu w-100">
+        <li><a routerLink="/ql" class="dropdown-item">QC List</a></li>
+        <li><a routerLink="/aq" class="dropdown-item">Add QC</a></li>
+      </ul>
+    </li>
+
+    <!-- Warehouse -->
+    <li *ngIf="hasRole('ROLE_MARCH') || hasRole('ROLE_WAREHOUSE')" class="nav-item dropdown">
+      <button class="nav-link dropdown-toggle btn w-100 text-start" data-bs-toggle="dropdown">
+        Warehouse
+      </button>
+      <ul class="dropdown-menu w-100">
+        <li><a routerLink="/cwl" class="dropdown-item">Collection List</a></li>
+        <li><a routerLink="/aw" class="dropdown-item">Add Collection</a></li>
+      </ul>
+    </li>
+
+    <!-- Shipping -->
+    <li *ngIf="hasRole('ROLE_MARCH') || hasRole('ROLE_SHIPPING')" class="nav-item dropdown">
+      <button class="nav-link dropdown-toggle btn w-100 text-start" data-bs-toggle="dropdown">
+        Shipping
+      </button>
+      <ul class="dropdown-menu w-100">
+        <li><a routerLink="/shiplist" class="dropdown-item">Shipment List</a></li>
+        <li><a routerLink="/addship" class="dropdown-item">Add Shipment</a></li>
+      </ul>
+    </li>
+
+  </ul>
+</nav>
+
+
+
+<!--
+
 <nav class="navbar navbar-expand-sm justify-content-between fixed-top" style="border: 3px solid #a0a1a3; background-color: #c5cedb;">
   <ul class="navbar-nav">
     <li class="nav-item"><a routerLink="/" class="nav-link text-success">Home</a></li>
@@ -14,14 +164,14 @@
     </li>
   </ul>
 
-  <!-- Right-aligned buttons for Login and Logout -->
+<nav>
   <ul class="navbar-nav">
-    <!-- Login Button -->
+  
     <li class="nav-item">
       <a routerLink="/login" class="btn btn-info text-success nav-link">Login</a>
     </li>
 
-    <!-- Logout Button -->
+    
     <li class="nav-item">
       <button (click)="onLogout()" class="btn btn-info text-success nav-link">Logout</button>
     </li>
@@ -29,12 +179,11 @@
 </nav>
 
 
-<!-- Vertical Sidebar for Roles -->
 <nav class="position-fixed p-3"
     style="top: 56px; left: 0; height: calc(100vh - 56px); width: 250px; border: 3px solid #a0a1a3; background-color: #c5cedb">
   <ul class="nav flex-column">
 
-    <!-- Marchendising -->
+    
     <li *ngIf="hasRole('ROLE_MARCH')" class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Marchendising</a>
       <ul class="dropdown-menu">
@@ -49,7 +198,7 @@
       </ul>
     </li>
 
-    <!-- Design -->
+    
     <li *ngIf="hasRole('ROLE_MARCH') || hasRole('ROLE_DESIGN')" class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Design</a>
       <ul class="dropdown-menu">
@@ -59,7 +208,7 @@
       </ul>
     </li>
 
-    <!-- Fabric -->
+    
     <li *ngIf="hasRole('ROLE_MARCH') || hasRole('ROLE_FABRIC')" class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Fabric</a>
       <ul class="dropdown-menu">
@@ -69,7 +218,7 @@
       </ul>
     </li>
 
-    <!-- Cutting -->
+
     <li *ngIf="hasRole('ROLE_MARCH') || hasRole('ROLE_CUTTING')" class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Cutting</a>
       <ul class="dropdown-menu">
@@ -80,7 +229,7 @@
       </ul>
     </li>
 
-    <!-- Sewing -->
+    
     <li *ngIf="hasRole('ROLE_MARCH') || hasRole('ROLE_SEWING')" class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Sewing</a>
       <ul class="dropdown-menu">
@@ -89,7 +238,7 @@
       </ul>
     </li>
 
-    <!-- Finishing -->
+  
     <li *ngIf="hasRole('ROLE_MARCH') || hasRole('ROLE_FINISHING')" class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Finishing</a>
       <ul class="dropdown-menu">
@@ -98,7 +247,7 @@
       </ul>
     </li>
 
-    <!-- QC -->
+    
     <li *ngIf="hasRole('ROLE_MARCH') || hasRole('ROLE_QC')" class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">QC</a>
       <ul class="dropdown-menu">
@@ -106,8 +255,8 @@
         <li><a routerLink="/aq" class="dropdown-item">Add QC</a></li>
       </ul>
     </li>
-
-    <!-- Warehouse -->
+     
+    
     <li *ngIf="hasRole('ROLE_MARCH') || hasRole('ROLE_WAREHOUSE')" class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Warehouse</a>
       <ul class="dropdown-menu">
@@ -116,7 +265,7 @@
       </ul>
     </li>
 
-    <!-- Shipping -->
+    
     <li *ngIf="hasRole('ROLE_MARCH') || hasRole('ROLE_SHIPPING')" class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Shipping</a>
       <ul class="dropdown-menu">
@@ -127,3 +276,5 @@
 
   </ul>
 </nav>
+
+-->

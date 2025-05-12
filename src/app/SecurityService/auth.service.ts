@@ -12,14 +12,10 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-
-
   login(email: string, password: string): Observable<any> {
     const loginPayload = { email, password };
     return this.http.post<any>(this.apiUrl, loginPayload);
   }
-
-
 
   saveToken(token: string): void {
     if (token) {
@@ -29,50 +25,49 @@ export class AuthService {
     }
   }
 
-
-
   getToken(): string | null {
     return localStorage.getItem('token');
   }
 
-
-
-
-  getUserRoles(): string[] {
+  // Helper function to decode JWT and get roles directly from the token
+  private decodeToken(): any {
     const token = this.getToken();
-    if (!token) return [];
+    if (!token) return null;
     try {
-      const payload = JSON.parse(atob(token.split('.')[1]));
-      return payload.roles || [];
+      const payload = JSON.parse(atob(token.split('.')[1]));  // Decode base64 payload
+      return payload;
     } catch (error) {
       console.error('Invalid token:', error);
-      return [];
+      return null;
     }
   }
-  
 
+  // Check if a user has a specific role by decoding the token
+  hasRole(role: string): boolean {
+    const decodedToken = this.decodeToken();
+    if (decodedToken && decodedToken.roles) {
+      return decodedToken.roles.includes(role); // Check if the role exists in the roles array
+    }
+    return false;
+  }
 
   isLoggedIn(): boolean {
     return !!this.getToken();  // ✅ Return true if token exists
   }
-  
-
-
 
   isAuthenticated(): boolean {
     return this.getToken() !== null;
   }
 
-
-  // this is for logout option 
+  // For logout functionality
   logout(): void {
     localStorage.removeItem('token');
-  }
-
 
   
 }
 
+
+}
 
 
 

@@ -1,7 +1,7 @@
 
 
 // src/app/components/login/login.component.ts
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../SecurityService/auth.service';
 import { FormsModule } from '@angular/forms';
@@ -18,23 +18,32 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
   errorMessage: string = '';
-
+   
+  // isLoggedIn = false;
   constructor(private authService: AuthService, private router: Router) { }
+
+ // ngOnInit(): void {
+   // this.isLoggedIn = this.authService.isLoggedIn()
+    //  if (this.isLoggedIn) {
+     // this.router.navigate(['/home']); // auto-redirect if already logged in
+  //  }
+ // }
 
   // Login form submission handler
   onSubmit(): void {
     // Check if email or password is empty
     if (!this.email || !this.password) {
       this.errorMessage = 'Please enter both email and password';
-      return; // Do not proceed with the form submission
+     // return; // Do not proceed with the form submission
     }
 
     // Call AuthService to authenticate the user
     this.authService.login(this.email, this.password).subscribe({
       next: (response) => {
+        this.router.navigate(['/home'])
         if (response && response.token) {
           this.authService.saveToken(response.token); // Save token only if received
-          this.router.navigate(['/home']); // Redirect after successful login
+          //this.router.navigate(['/home']); // Redirect after successful login
         } else {
           this.errorMessage = 'Login failed: No token received';
         }

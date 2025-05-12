@@ -11,22 +11,15 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class NavbarComponent {
 
+constructor(public authService: AuthService, private router: Router) { }
 
-  constructor(public authService: AuthService, private router:Router) {}
-
-
-
-
-  // Updated method to use getUserRoles() from AuthService
+  // This method now uses AuthService's hasRole to check for roles
   hasRole(role: string): boolean {
-    return this.authService.getUserRoles().includes(role);
+    return this.authService.hasRole(role); // Directly calls hasRole from AuthService
   }
-
-  //  this is logout method call in  the  navbar.ts
 
   onLogout() {
     this.authService.logout();
     this.router.navigate(['/login']); // Redirect to the login page after logout
   }
-
 }
