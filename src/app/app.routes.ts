@@ -40,44 +40,44 @@ import { LoginComponent } from './login/login.component';
     { path: 'login', component: LoginComponent },
   
     // Marchendising
-    { path: 'buyer-list', component: BuyerListComponent, canActivate: [RoleGuard], data: { roles: [Roles.MARCH] } },
-    { path: 'add-buyer', component: AddBuyerComponent, canActivate: [RoleGuard], data: { roles: [Roles.MARCH] } },
-    { path: 'add-order', component: AddOrderComponent, canActivate: [RoleGuard], data: { roles: [Roles.MARCH] } },
-    { path: 'order-list', component: OrderlistComponent, canActivate: [RoleGuard], data: { roles: [Roles.MARCH] } },
-    { path: 'add-march-order', component: AddMarchendiserOrderComponent, canActivate: [RoleGuard], data: { roles: [Roles.MARCH] } },
-    { path: 'march-order-list', component: MarchendiserOrderlistComponent, canActivate: [RoleGuard], data: { roles: [Roles.MARCH] } },
+    { path: 'bl', component: BuyerListComponent, canActivate: [RoleGuard], data: { roles: [Roles.MARCH] } },
+    { path: 'ab', component: AddBuyerComponent, canActivate: [RoleGuard], data: { roles: [Roles.MARCH] } },
+    { path: 'ao', component: AddOrderComponent, canActivate: [RoleGuard], data: { roles: [Roles.MARCH] } },
+    { path: 'ol', component: OrderlistComponent, canActivate: [RoleGuard], data: { roles: [Roles.MARCH] } },
+    { path: 'am', component: AddMarchendiserOrderComponent, canActivate: [RoleGuard], data: { roles: [Roles.MARCH] } },
+    { path: 'ml', component: MarchendiserOrderlistComponent, canActivate: [RoleGuard], data: { roles: [Roles.MARCH] } },
   
     // Design
-    { path: 'add-design', component: AddDesignComponent, canActivate: [RoleGuard], data: { roles: [Roles.DESIGN, Roles.MARCH] } },
-    { path: 'design-list', component: DesignListComponent, canActivate: [RoleGuard], data: { roles: [Roles.DESIGN, Roles.MARCH] } },
+    { path: 'ad', component: AddDesignComponent, canActivate: [RoleGuard], data: { roles: [Roles.DESIGN, Roles.MARCH] } },
+    { path: 'dl', component: DesignListComponent, canActivate: [RoleGuard], data: { roles: [Roles.DESIGN, Roles.MARCH] } },
   
     // Fabric
-    { path: 'add-fabric', component: AddFabricComponent, canActivate: [RoleGuard], data: { roles: [Roles.FABRIC, Roles.MARCH] } },
-    { path: 'fabric-list', component: FabricListComponent, canActivate: [RoleGuard], data: { roles: [Roles.FABRIC, Roles.MARCH] } },
+    { path: 'af', component: AddFabricComponent, canActivate: [RoleGuard], data: { roles: [Roles.FABRIC, Roles.MARCH] } },
+    { path: 'fl', component: FabricListComponent, canActivate: [RoleGuard], data: { roles: [Roles.FABRIC, Roles.MARCH] } },
   
     // Cutting
-    { path: 'add-cutting', component: AddCuttingComponent, canActivate: [RoleGuard], data: { roles: [Roles.CUTTING, Roles.MARCH] } },
-    { path: 'cutting-list', component: CuttingListComponent, canActivate: [RoleGuard], data: { roles: [Roles.CUTTING, Roles.MARCH] } },
+    { path: 'ac', component: AddCuttingComponent, canActivate: [RoleGuard], data: { roles: [Roles.CUTTING, Roles.MARCH] } },
+    { path: 'cl', component: CuttingListComponent, canActivate: [RoleGuard], data: { roles: [Roles.CUTTING, Roles.MARCH] } },
   
     // Sewing
-    { path: 'add-sewing', component: AddSewingComponent, canActivate: [RoleGuard], data: { roles: [Roles.SEWING, Roles.MARCH] } },
-    { path: 'sewing-list', component: SewingListComponent, canActivate: [RoleGuard], data: { roles: [Roles.SEWING, Roles.MARCH] } },
+    { path: 'as', component: AddSewingComponent, canActivate: [RoleGuard], data: { roles: [Roles.SEWING, Roles.MARCH] } },
+    { path: 'sl', component: SewingListComponent, canActivate: [RoleGuard], data: { roles: [Roles.SEWING, Roles.MARCH] } },
   
     // Finishing
-    { path: 'add-finishing', component: AddFinishingComponent, canActivate: [RoleGuard], data: { roles: [Roles.FINISHING, Roles.MARCH] } },
-    { path: 'finishing-list', component: FinishingListComponent, canActivate: [RoleGuard], data: { roles: [Roles.FINISHING, Roles.MARCH] } },
+    { path: 'afi', component: AddFinishingComponent, canActivate: [RoleGuard], data: { roles: [Roles.FINISHING, Roles.MARCH] } },
+    { path: 'fli', component: FinishingListComponent, canActivate: [RoleGuard], data: { roles: [Roles.FINISHING, Roles.MARCH] } },
   
     // QC
-    { path: 'add-qc', component: AddQcCheckComponent, canActivate: [RoleGuard], data: { roles: [Roles.QC, Roles.MARCH] } },
-    { path: 'qc-list', component: QcListComponent, canActivate: [RoleGuard], data: { roles: [Roles.QC, Roles.MARCH] } },
+    { path: 'aq', component: AddQcCheckComponent, canActivate: [RoleGuard], data: { roles: [Roles.QC, Roles.MARCH] } },
+    { path: 'ql', component: QcListComponent, canActivate: [RoleGuard], data: { roles: [Roles.QC, Roles.MARCH] } },
   
     // Warehouse
-    { path: 'add-collection', component: AddCollectionComponent, canActivate: [RoleGuard], data: { roles: [Roles.WAREHOUSE, Roles.MARCH] } },
-    { path: 'collection-list', component: CollectioinListComponent, canActivate: [RoleGuard], data: { roles: [Roles.WAREHOUSE, Roles.MARCH] } },
+    { path: 'aw', component: AddCollectionComponent, canActivate: [RoleGuard], data: { roles: [Roles.WAREHOUSE, Roles.MARCH] } },
+    { path: 'cwl', component: CollectioinListComponent, canActivate: [RoleGuard], data: { roles: [Roles.WAREHOUSE, Roles.MARCH] } },
   
     // Shipping
-    { path: 'add-shipment', component: AddShipmentComponent, canActivate: [RoleGuard], data: { roles: [Roles.SHIPPING, Roles.MARCH] } },
-    { path: 'shipment-list', component: ShipmentlistComponent, canActivate: [RoleGuard], data: { roles: [Roles.SHIPPING, Roles.MARCH] } },
+    { path: 'addship', component: AddShipmentComponent, canActivate: [RoleGuard], data: { roles: [Roles.SHIPPING, Roles.MARCH] } },
+    { path: 'shiplist', component: ShipmentlistComponent, canActivate: [RoleGuard], data: { roles: [Roles.SHIPPING, Roles.MARCH] } },
   
     // Fallback
     { path: '**', redirectTo: 'login', pathMatch: 'full' }

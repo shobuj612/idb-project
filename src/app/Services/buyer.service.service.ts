@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Buyer } from '../Model/buyer.model';
@@ -12,9 +12,32 @@ export class BuyerServiceService {
 
   constructor(private http: HttpClient) { }
 
+  // this is the method to get the token from the localstorage
+
+ // private getToken() {
+
+    // const token=localStorage.getItem('token') ;
+
+    // return {
+
+      // headers: new HttpHeaders({
+      
+         //   Authorization : `Bearer ${token}`  
+      // })
+
+    // };
+
+ // }
+
   // Method to get all the data from the database
   getAllBuyerByService(): Observable<Buyer[]> {
-    return this.http.get<Buyer[]>(this.baseUrl);
+    const token =localStorage.getItem('token');
+    const headers =new HttpHeaders({
+
+      'Authorization' : ` Bearer ${token}`
+    })
+
+    return this.http.get<Buyer[]>(this.baseUrl,{headers});
   }
 
   // Method to update a buyer in the database
@@ -22,12 +45,26 @@ export class BuyerServiceService {
     if (id == null) {
       throw new Error('Buyer ID cannot be null or undefined');
     }
-    return this.http.put<Buyer>(`${this.baseUrl}/${id}`, buyer);
+
+    const token =localStorage.getItem('token');
+    const headers =new HttpHeaders({
+
+      'Authorization' : ` Bearer ${token}`
+    })
+    return this.http.put<Buyer>(`${this.baseUrl}/${id}`, buyer ,{headers});
   }
 
   // Method to create a new buyer in the database
   createBuyerByService(buyer: Buyer): Observable<Buyer> {
-    return this.http.post<Buyer>(this.baseUrl, buyer);
+
+    const token =localStorage.getItem('token');
+    const headers =new HttpHeaders({
+
+      'Authorization' : ` Bearer ${token}`
+    })
+
+
+    return this.http.post<Buyer>(this.baseUrl, buyer ,{headers});
   }
 
   // Method to delete a buyer from the database
@@ -35,7 +72,15 @@ export class BuyerServiceService {
     if (id <= 0) {
       throw new Error('Invalid ID for deletion');
     }
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+
+    const token =localStorage.getItem('token');
+    const headers =new HttpHeaders({
+
+      'Authorization' : ` Bearer ${token}`
+    })
+
+
+    return this.http.delete<void>(`${this.baseUrl}/${id}` ,{headers});
   }
 
 }
