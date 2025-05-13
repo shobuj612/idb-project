@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Order } from '../../Model/order.model';
@@ -14,10 +14,26 @@ export class OrderService {
 
   constructor(private ht:HttpClient) { }
 
+     // this is the method to get the token from the localsotrage
+
+     private getToken():{headers:HttpHeaders}{
+
+         const token =localStorage.getItem('token');
+
+         return {
+
+            headers: new HttpHeaders({
+
+              Authorization:`Bearer ${token}`
+            })
+         }
+
+     }
+
 // this is the method to get all the Order from the database
   getAllOrderByService():Observable<Order[]>{
 
-    return this.ht.get<Order[]>(this.postUrl);
+    return this.ht.get<Order[]>(this.postUrl,this.getToken());
   }
 
   // this is the update method 
@@ -31,7 +47,7 @@ export class OrderService {
         throw new Error('id will not be undefined')
       }
 
-      return this.ht.put<Order>(`${this.postUrl}/${id}`,order)
+      return this.ht.put<Order>(`${this.postUrl}/${id}`,order ,this.getToken())
   }
 
 
@@ -40,7 +56,7 @@ export class OrderService {
 
   createOrderByService(order:Order):Observable<Order>{
 
-    return this.ht.post<Order>(this.postUrl,order)
+    return this.ht.post<Order>(this.postUrl,order ,this.getToken())
   }
 
     // this is the method to delete data from the database
@@ -53,6 +69,6 @@ export class OrderService {
         throw new Error('invalid id for deletion?')
       }
 
-      return this.ht.delete<void>(`${this.postUrl}/${id}`)
+      return this.ht.delete<void>(`${this.postUrl}/${id}` ,this.getToken())
     }
 }

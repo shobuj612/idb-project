@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Design } from '../../Model/design.model';
@@ -14,7 +14,14 @@ export class DesignService {
 
   getAllDesign():Observable<Design[]>{
 
-    return this.http.get<Design[]>(this.baseUrl)
+
+    const token =localStorage.getItem('token');
+    const headers=new HttpHeaders({
+
+      'Authorization':`Bearer ${token}`
+    })
+
+    return this.http.get<Design[]>(this.baseUrl,{headers})
 
 
   }
@@ -28,12 +35,28 @@ export class DesignService {
 
     }
 
-    return this.http.put<Design>(this.baseUrl+'/'+id,design)
+    
+
+    const token =localStorage.getItem('token');
+    const headers=new HttpHeaders({
+
+      'Authorization':`Bearer ${token}`
+    })
+
+    return this.http.put<Design>(this.baseUrl+'/'+id,design,{headers})
   }
 
     postDesingByService(design:Design):Observable<Design>{
 
-      return this.http.post<Design>(this.baseUrl,design)
+      
+
+    const token =localStorage.getItem('token');
+    const headers=new HttpHeaders({
+
+      'Authorization':`Bearer ${token}`
+    })
+
+      return this.http.post<Design>(this.baseUrl,design,{headers})
     }
 
 
@@ -44,7 +67,15 @@ export class DesignService {
         throw new Error('Invalid Erorr')
       }
 
-      return this.http.delete<void>(this.baseUrl+'/'+id)
+      
+
+    const token =localStorage.getItem('token');
+    const headers=new HttpHeaders({
+
+      'Authorization':`Bearer ${token}`
+    })
+
+      return this.http.delete<void>(this.baseUrl+'/'+id,{headers})
     }
 
 }
